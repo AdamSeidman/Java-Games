@@ -163,4 +163,13 @@ public class Card {
 		return _number == 11 || _number == 12 || _number == 13;
 	}
 
+	public boolean isBlackjackWith(Card c) {
+		if(_number == Constants.ACE) {
+			return c.isFaceCard();
+		} else if(_number > 10 && c.getNum() < 10) {
+			return c.isBlackjackWith(this);
+		}
+		return false;
+	}
+	
 }
