@@ -14,6 +14,13 @@ import seidman.adam.games.snake.utilities.Variables;
 import seidman.adam.games.utilities.WindowLeavingAdapter;
 import seidman.adam.games.utilities.timing.TimedTask;
 
+/**
+ * 
+ * The user interface for a Snake game.
+ * 
+ * @author Adam Seidman
+ *
+ */
 public class SnakeUI extends JFrame implements Playable {
 
 	private static final long serialVersionUID = 1L;
@@ -22,10 +29,14 @@ public class SnakeUI extends JFrame implements Playable {
 	private SnakeGame _game;
 	private boolean _paused;
 
+	/**
+	 * Create a new Snake User Interface and set is visible to the user.
+	 */
 	private SnakeUI() {
 		super(Variables.TITLE + Variables.POINTS_PHRASE + Integer.toString(0));
 		_paused = false;
 		if (Variables.USE_WINDOW_LISTENER) {
+			// If this mode is on, the JFrame will ask you before leaving.
 			this.addWindowListener(new WindowLeavingAdapter(Variables.TITLE, Variables.QUIT_MESSAGE) {
 				public void windowClosing() {
 					SnakeUI.getInstance().setVisible(false);
@@ -47,11 +58,16 @@ public class SnakeUI extends JFrame implements Playable {
 			@Override
 			public void task() {
 				SnakeUI.getInstance().getKeyListeners()[0].keyPressed(
+						// Wait, so graphics show up
 						new KeyEvent(SnakeUI.getInstance().getContentPane(), 0, 0, 0, KeyEvent.VK_P, 'P', 0));
 			}
 		}.schedule();
 	}
 
+	/**
+	 * Get the current running instance of SnakeUI.
+	 * @return SnakeUI- current user interface.
+	 */
 	public static SnakeUI getInstance() {
 		if (_instance == null) {
 			_instance = new SnakeUI();
@@ -59,6 +75,10 @@ public class SnakeUI extends JFrame implements Playable {
 		return _instance;
 	}
 
+	/**
+	 * Show/hide the pause menu on the screen.
+	 * @param show Whether or not you would like to show the pause message.
+	 */
 	public void displayPauseMenu(boolean show) {
 		boolean prevPaused = _paused;
 		_paused = show;
@@ -74,6 +94,9 @@ public class SnakeUI extends JFrame implements Playable {
 		}
 	}
 
+	/**
+	 * Implemented for Playable interface.
+	 */
 	public void runUI() {
 		SnakeUI.getInstance().setVisible(true);
 	}

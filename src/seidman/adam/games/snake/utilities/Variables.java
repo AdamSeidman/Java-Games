@@ -6,6 +6,11 @@ import java.awt.Font;
 
 import seidman.adam.games.utilities.Index;
 
+/**
+ * 
+ * @author Adam Seidman
+ *
+ */
 public abstract class Variables {
 
 	private static final int SQUARE_SIZE_PX = 25;
