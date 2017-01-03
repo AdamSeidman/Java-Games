@@ -33,21 +33,21 @@ public abstract class WindowLeavingAdapter implements WindowListener {
 		this.QUIT_MESSAGE = quitMessage;
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowActivated() method from things to implement.
 	 */
 	public void windowActivated(WindowEvent e) {
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowClosed() method from things to implement.
 	 */
 	public void windowClosed(WindowEvent e) {
 	}
 
-	@Override
+	
 	/**
 	 * Will confirm if the user actually wants to leave. If they do, will run
 	 * windowClosing().	
@@ -66,28 +66,28 @@ public abstract class WindowLeavingAdapter implements WindowListener {
 		}
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowDeactivated() method from things to implement.
 	 */
 	public void windowDeactivated(WindowEvent e) {
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowDeiconified() method from things to implement.
 	 */
 	public void windowDeiconified(WindowEvent e) {
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowIconified() method from things to implement.
 	 */
 	public void windowIconified(WindowEvent e) {
 	}
 
-	@Override
+	
 	/**
 	 * Removes windowOpened() method from things to implement.
 	 */

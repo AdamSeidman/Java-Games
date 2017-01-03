@@ -96,7 +96,7 @@ public abstract class TimedTask {
 	 * @return Desired task as java.util.TimerTask
 	 */
 	private TimerTask getTask() {
-		TimedTask tt = this;
+		final TimedTask tt = this;
 		return new TimerTask() {
 			public void run() {
 				task();

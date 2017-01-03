@@ -1,5 +1,6 @@
 package seidman.adam.games.minesweeper;
 
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 
@@ -10,11 +11,12 @@ import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 
-import seidman.adam.games.UI;
-import seidman.adam.games.minesweeper.logic.Game;
+import seidman.adam.games.Playable;
+import seidman.adam.games.minesweeper.logic.MinesweeperGame;
 import seidman.adam.games.minesweeper.utilities.Variables;
 import seidman.adam.games.utilities.WindowLeavingAdapter;
 import seidman.adam.games.utilities.menu.MenuAdapter;
+import seidman.adam.games.utilities.menu.MenuBarAdapter;
 import seidman.adam.games.utilities.menu.MenuSeparator;
 
 /**
@@ -22,9 +24,9 @@ import seidman.adam.games.utilities.menu.MenuSeparator;
  * Main user interface for the minesweeper game.
  * 
  * @author Adam Seidman
- *
+ * 
  */
-public final class MinesweeperUI extends JFrame implements UI {
+public final class MinesweeperUI extends JFrame implements Playable {
 
 	private static final long serialVersionUID = 1L;
 	private static MinesweeperUI _instance;
@@ -48,7 +50,7 @@ public final class MinesweeperUI extends JFrame implements UI {
 						Variables.TITLE, JOptionPane.PLAIN_MESSAGE, null);
 			}
 		});
-		this.setContentPane(Game.getInstance().getPanel());
+		this.setContentPane(MinesweeperGame.getInstance().getPanel());
 		// Create four menu options and add their
 		// seidman.adam.games.minesweeper.utilities.MenuAdapter's.
 		_menu = new JMenuBar();
@@ -69,7 +71,7 @@ public final class MinesweeperUI extends JFrame implements UI {
 							"Restart", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE, null, null, -1);
 				}
 				if (a == 0) {
-					Game.getInstance().reDoGame();
+					MinesweeperGame.getInstance().reDoGame();
 				}
 			}
 		});
@@ -91,6 +93,11 @@ public final class MinesweeperUI extends JFrame implements UI {
 			}
 		});
 		_menu.add(_about);
+		_menu.addFocusListener(new MenuBarAdapter() {
+			public Container getContent() {
+				return MinesweeperUI.getInstance().getContentPane();
+			}
+		});
 		this.setJMenuBar(_menu);
 		this.setResizable(Variables.RESIZABLE);
 	}
@@ -111,7 +118,7 @@ public final class MinesweeperUI extends JFrame implements UI {
 	 * Redraw all important graphics on the UI.
 	 */
 	public void reset() {
-		this.setContentPane(Game.getInstance().getPanel());
+		this.setContentPane(MinesweeperGame.getInstance().getPanel());
 		this.revalidate();
 		this.repaint();
 	}

@@ -22,7 +22,7 @@ public abstract class Variables {
 
 	// Variables that developers can see.
 	public static final int GRID_BUFFER = 5;
-	public static final boolean RESIZABLE = false;
+	public static final boolean RESIZABLE = true;
 	public static final String TITLE = "Minesweeper";
 	public static final String LOSE_MESSAGE = "You have lost.";
 	public static final String WIN_MESSAGE = "You win!";

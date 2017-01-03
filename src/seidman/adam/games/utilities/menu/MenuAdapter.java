@@ -51,5 +51,5 @@ public abstract class MenuAdapter implements MenuListener {
 	 * clicked.
 	 */
 	public abstract void menuClicked();
-
+	
 }

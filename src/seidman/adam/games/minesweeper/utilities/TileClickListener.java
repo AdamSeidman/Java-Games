@@ -9,7 +9,7 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import seidman.adam.games.minesweeper.MinesweeperUI;
-import seidman.adam.games.minesweeper.logic.Game;
+import seidman.adam.games.minesweeper.logic.MinesweeperGame;
 import seidman.adam.games.minesweeper.logic.Tile;
 
 /**
@@ -62,11 +62,11 @@ public final class TileClickListener implements MouseListener {
 	 * On mouse release over a tile, perform the correct action for the tile.
 	 */
 	public void mouseReleased(MouseEvent e) {
-		Game g = Game.getInstance();
-		Game._mouseEvent = e;
-		if (!Game.hasInitialIndex()) {
+		MinesweeperGame g = MinesweeperGame.getInstance();
+		MinesweeperGame._mouseEvent = e;
+		if (!MinesweeperGame.hasInitialIndex()) {
 			// If this is first click on the board, reset the board.
-			Game.sendInitialIndex(TILE.getIndex());
+			MinesweeperGame.sendInitialIndex(TILE.getIndex());
 		} else if (TILE.isClicked() || (TILE.isProtected() && !isProtectClick(e))) {
 			// Ignore left-click of tile that is protected.
 			return;

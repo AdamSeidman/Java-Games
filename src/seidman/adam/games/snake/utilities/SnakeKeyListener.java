@@ -3,7 +3,8 @@ package seidman.adam.games.snake.utilities;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import seidman.adam.games.snake.logic.Game;
+import seidman.adam.games.snake.SnakeUI;
+import seidman.adam.games.snake.logic.SnakeGame;
 import seidman.adam.games.utilities.Direction;
 import seidman.adam.games.utilities.timing.TimedTask;
 
@@ -21,17 +22,23 @@ public class SnakeKeyListener implements KeyListener {
 		_currentDirection = Direction.RIGHT;
 	}
 
-	@Override
 	public void keyTyped(KeyEvent e) {
 	}
 
-	@Override
 	public void keyPressed(KeyEvent e) {
 		if ((!(isVertical(e) || isHorizontal(e))) || (isVertical(e) && _vertical) || (isHorizontal(e) && _horizontal)) {
-			return;
+			if (!(e.getKeyCode() == KeyEvent.VK_SPACE || e.getKeyCode() == KeyEvent.VK_P)) {
+				return;
+			}
 		}
 		_updateTask.stop();
 		switch (e.getKeyCode()) {
+		case KeyEvent.VK_P:
+			SnakeUI.getInstance().displayPauseMenu(true);
+			return;
+		case KeyEvent.VK_SPACE:
+			SnakeUI.getInstance().displayPauseMenu(false);
+			break;
 		case KeyEvent.VK_RIGHT:
 			_currentDirection = Direction.RIGHT;
 			setHorizontality(true);
@@ -49,7 +56,7 @@ public class SnakeKeyListener implements KeyListener {
 			setHorizontality(false);
 			break;
 		}
-		Game.getInstance().update();
+		SnakeGame.getInstance().update();
 		_updateTask.start();
 	}
 
@@ -58,7 +65,6 @@ public class SnakeKeyListener implements KeyListener {
 		_vertical = !horizontal;
 	}
 
-	@Override
 	public void keyReleased(KeyEvent e) {
 	}
 
@@ -76,6 +82,11 @@ public class SnakeKeyListener implements KeyListener {
 
 	public boolean isDirection(Direction d) {
 		return _currentDirection.equals(d);
+	}
+
+	public void reset() {
+		_currentDirection = Direction.EAST;
+		setHorizontality(true);
 	}
 
 }

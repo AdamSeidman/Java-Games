@@ -22,9 +22,9 @@ import seidman.adam.games.utilities.Index;
  * @author Adam Seidman
  *
  */
-public final class Game {
+public final class MinesweeperGame {
 
-	private static Game _instance;
+	private static MinesweeperGame _instance;
 	private static Random _random;
 	private static Index _initialIndex;
 	private boolean _ranOnce;
@@ -34,7 +34,7 @@ public final class Game {
 
 	private Tile[][] _tiles;
 
-	private Game() {
+	private MinesweeperGame() {
 		_numOfMinesLeftLabel = new JLabel(Variables.minesLeftLabelText(0), SwingConstants.CENTER);
 		_ranOnce = false;
 		_random = new Random();
@@ -44,9 +44,9 @@ public final class Game {
 	/**
 	 * @return The current Game running.
 	 */
-	public static Game getInstance() {
+	public static MinesweeperGame getInstance() {
 		if (_instance == null) {
-			_instance = new Game();
+			_instance = new MinesweeperGame();
 		}
 		return _instance;
 	}
@@ -59,7 +59,7 @@ public final class Game {
 	 */
 	public static void sendInitialIndex(Index i) {
 		_initialIndex = i;
-		Game.getInstance().restart();
+		MinesweeperGame.getInstance().restart();
 	}
 
 	/**
@@ -123,7 +123,7 @@ public final class Game {
 		if (hasInitialIndex()) {
 			// If you are resetting the board based on the first click, re-click
 			// the initial index.
-			_tiles[_initialIndex.x][_initialIndex.y].getMouseListeners()[0].mouseReleased(_mouseEvent);
+			_tiles[_initialIndex.getX()][_initialIndex.getY()].getMouseListeners()[0].mouseReleased(_mouseEvent);
 			MinesweeperUI.getInstance().reset();
 		}
 		_ranOnce = true;
@@ -137,9 +137,9 @@ public final class Game {
 	 *            Index of the blank tile clicked.
 	 */
 	public void blankClicks(Index i) {
-		for (int iX = i.x - 1; iX <= i.x + 1; iX++) {
-			for (int iY = i.y - 1; iY <= i.y + 1; iY++) {
-				if (iX == i.x && iY == i.y) {
+		for (int iX = i.getX() - 1; iX <= i.getX() + 1; iX++) {
+			for (int iY = i.getY() - 1; iY <= i.getY() + 1; iY++) {
+				if (iX == i.getX() && iY == i.getY()) {
 					// Don't keep calling the same blank tile.
 					continue;
 				}

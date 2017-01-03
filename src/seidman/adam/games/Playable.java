@@ -1,5 +1,5 @@
 package seidman.adam.games;
 
-public interface UI {
+public interface Playable {
 	public void runUI();
 }

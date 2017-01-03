@@ -149,12 +149,12 @@ public class Card {
 				Constants.ROUND_RECT_CONSTANTS[1]);
 		if (_number > 0) {
 			for (Index i : Constants.coordMap(x, y).get(_number)) {
-				_suit.draw(g, i.x, i.y);
+				_suit.draw(g, i.getX(), i.getY());
 			}
 		} else {
 			g.setColor(Constants.CARD_BACK_SYMBOL_COLOR);
-			g.fillOval((x + Constants.CARD_CENTER.x) - (Constants.SYMBOL_WIDTH / 2),
-					(y + Constants.CARD_CENTER.y) - (Constants.SYMBOL_HEIGHT / 2), Constants.SYMBOL_WIDTH,
+			g.fillOval((x + Constants.CARD_CENTER.getX()) - (Constants.SYMBOL_WIDTH / 2),
+					(y + Constants.CARD_CENTER.getY()) - (Constants.SYMBOL_HEIGHT / 2), Constants.SYMBOL_WIDTH,
 					Constants.SYMBOL_HEIGHT);
 		}
 	}

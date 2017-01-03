@@ -7,44 +7,15 @@ package seidman.adam.games.utilities;
  * @author Adam Seidman
  *
  */
-public final class Direction {
-
-	// List of many possible Directions that can be used.
-	public static final Direction NORTH = new Direction(0);
-	public static final Direction UP = new Direction(0);
-	public static final Direction RIGHT = new Direction(1);
-	public static final Direction EAST = new Direction(1);
-	public static final Direction SOUTH = new Direction(2);
-	public static final Direction DOWN = new Direction(2);
-	public static final Direction WEST = new Direction(3);
-	public static final Direction LEFT = new Direction(3);
-	public static final Direction NONE = new Direction(4);
-	public static final Direction OTHER = new Direction(5);
-
-	private int direction;
-
-	// Private so no developer can make their own directions.
-	private Direction(int n) {
-		direction = n;
+public enum Direction {
+	NORTH(0), UP(0), RIGHT(1), EAST(1), DOWN(2), SOUTH(2), WEST(3), LEFT(3), OTHER(4), NONE(5);
+	Direction(int direction) {
+		this._direction = direction;
 	}
 
-	/**
-	 * @return Integer value of this Direction.
-	 */
-	public int toInt() {
-		return direction;
-	}
+	private final int _direction;
 
-	@Override
-	/**
-	 * Overriding method to check actual integer values if comparing two
-	 * Directions.
-	 */
-	public boolean equals(Object obj) {
-		if (obj instanceof Direction) {
-			return ((Direction) obj).toInt() == direction;
-		}
-		return super.equals(obj);
+	public boolean equals(Direction direction) {
+		return this._direction == direction._direction;
 	}
-
 }
