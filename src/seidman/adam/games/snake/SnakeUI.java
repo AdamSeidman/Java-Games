@@ -102,7 +102,8 @@ public class SnakeUI extends JFrame implements Playable {
 	}
 
 	public static void main(String[] args) {
+		
 		SnakeUI.getInstance().runUI();
 	}
-
+	
 }

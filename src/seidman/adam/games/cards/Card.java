@@ -14,6 +14,13 @@ import seidman.adam.games.utilities.Index;
  */
 public class Card {
 
+	private static double scaleFactor = 1.0; // TODO implement drawing correctly
+	
+	public static double setScaleFactor(double sf) {
+		scaleFactor = sf;
+		return scaleFactor;
+	}
+	
 	private Suit _suit;
 	private int _number;
 

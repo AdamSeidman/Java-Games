@@ -3,6 +3,7 @@ package seidman.adam.games.cards.blackjack;
 import javax.swing.JFrame;
 
 import seidman.adam.games.Playable;
+import seidman.adam.games.cards.blackjack.logic.BlackjackGame;
 
 /**
  * 
@@ -15,12 +16,14 @@ public class BlackjackUI extends JFrame implements Playable {
 
 	private static final long serialVersionUID = 1L;
 	private static BlackjackUI _instance;
+	
+	private BlackjackGame _game;
 
 	/**
 	 * Create a BlackjackUI
 	 */
 	private BlackjackUI() {
-
+		_game = BlackjackGame.getInstance();
 	}
 
 	/**
