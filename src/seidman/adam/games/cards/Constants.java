@@ -3,7 +3,6 @@ package seidman.adam.games.cards;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import seidman.adam.games.utilities.Index;
 
@@ -46,95 +45,95 @@ public class Constants {
 	private static final int SEVEN_OFFSET = 35;
 	private static final int FACE_OFFSET = 32;
 
-	protected static final HashMap<Integer, ArrayList<Index>> coordMap(int x, int y) {
-		Index cardCenter = new Index(x + (Card.scale(CARD_WIDTH) / 2), y + (Card.scale(CARD_HEIGHT) / 2));
-		HashMap<Integer, ArrayList<Index>> ret = new HashMap<Integer, ArrayList<Index>>();
-		int outOffX = Card.scale(OUTSIDE_OFFSET_X);
-		int outOffY = Card.scale(OUTSIDE_OFFSET_Y);
-		int fourThroughTenY = Card.scale(FOUR_THROUGH_TEN_OFFSET_Y);
-		int twoAndThree = Card.scale(TWO_AND_THREE_OFFSET);
-		int eightAndTen = Card.scale(EIGHT_AND_TEN_OFFSET);
+	protected static final ArrayList<Index> coordList(int x, int y, Card card) {
+		Index cardCenter = new Index(x + (card.scale(CARD_WIDTH) / 2), y + (card.scale(CARD_HEIGHT) / 2));
+		int outOffX = card.scale(OUTSIDE_OFFSET_X);
+		int outOffY = card.scale(OUTSIDE_OFFSET_Y);
+		int fourThroughTenY = card.scale(FOUR_THROUGH_TEN_OFFSET_Y);
+		int twoAndThree = card.scale(TWO_AND_THREE_OFFSET);
+		int eightAndTen = card.scale(EIGHT_AND_TEN_OFFSET);
 		ArrayList<Index> indexList = new ArrayList<Index>();
-		indexList.add(cardCenter);
-		ret.put(ACE, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - twoAndThree));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + twoAndThree));
-		ret.put(2, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - twoAndThree));
-		indexList.add(cardCenter);
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + twoAndThree));
-		ret.put(3, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		ret.put(4, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(cardCenter);
-		ret.put(5, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
-		ret.put(6, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - Card.scale(SEVEN_OFFSET)));
-		ret.put(7, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
-		ret.put(8, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - outOffY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - outOffY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + outOffY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + outOffY));
-		indexList.add(cardCenter);
-		ret.put(9, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - outOffY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - outOffY));
-		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + outOffY));
-		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + outOffY));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
-		ret.put(10, indexList);
-		indexList = new ArrayList<Index>();
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + Card.scale(FACE_OFFSET)));
-		ret.put(JACK, indexList);
-		ret.put(QUEEN, indexList);
-		ret.put(KING, indexList);
-		return ret;
+
+		switch (card.getNum()) {
+		case ACE:
+			indexList.add(cardCenter);
+			break;
+		case 2:
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - twoAndThree));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + twoAndThree));
+			break;
+		case 3:
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - twoAndThree));
+			indexList.add(cardCenter);
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + twoAndThree));
+			break;
+		case 4:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			break;
+		case 5:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(cardCenter);
+			break;
+		case 6:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
+			break;
+		case 7:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - card.scale(SEVEN_OFFSET)));
+			break;
+		case 8:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
+			break;
+		case 9:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - outOffY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - outOffY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + outOffY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + outOffY));
+			indexList.add(cardCenter);
+			break;
+		case 10:
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - outOffY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - outOffY));
+			indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + outOffY));
+			indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + outOffY));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
+			break;
+		default:
+			indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + card.scale(FACE_OFFSET)));
+		}
+		return indexList;
 	}
 
 }

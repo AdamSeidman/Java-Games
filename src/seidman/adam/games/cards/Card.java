@@ -14,15 +14,15 @@ import seidman.adam.games.utilities.Index;
  */
 public class Card {
 
-	private static double scaleFactor = 1.0; // TODO implement drawing correctly
+	private double _scaleFactor = 1.0; // TODO implement drawing correctly
 
-	public static double setScaleFactor(double sf) {
-		scaleFactor = sf;
-		return scaleFactor;
+	public double setScaleFactor(double sf) {
+		this._scaleFactor = sf;
+		return this._scaleFactor;
 	}
 
-	public static double getScaleFactor() {
-		return scaleFactor;
+	public double getScaleFactor() {
+		return this._scaleFactor;
 	}
 
 	private Suit _suit;
@@ -159,26 +159,26 @@ public class Card {
 	 *            The number you want to scale
 	 * @return The scaled integer.
 	 */
-	static int scale(int n) {
-		return (int) (((double) n) * Card.getScaleFactor());
+	int scale(int n) {
+		return (int) (((double) n) * this.getScaleFactor());
 	}
 
 	public void draw(Graphics g, int x, int y) {
-		int width = Card.scale(Constants.CARD_WIDTH);
-		int height = Card.scale(Constants.CARD_HEIGHT);
+		int width = this.scale(Constants.CARD_WIDTH);
+		int height = this.scale(Constants.CARD_HEIGHT);
 		g.setColor(this._number <= 0 ? Constants.CARD_BACK_COLOR : Constants.CARD_FRONT_COLOR);
 		g.fillRoundRect(x, y, width, height, Constants.ROUND_RECT_CONSTANTS[0], Constants.ROUND_RECT_CONSTANTS[1]);
 		g.setColor(Constants.CARD_OUTLINE_COLOR);
 		g.drawRoundRect(x, y, width, height, Constants.ROUND_RECT_CONSTANTS[0], Constants.ROUND_RECT_CONSTANTS[1]);
 		if (_number > 0) {
-			for (Index i : Constants.coordMap(x, y).get(_number)) {
-				_suit.draw(g, i.getX(), i.getY());
+			for (Index i : Constants.coordList(x, y, this)) {
+				_suit.draw(g, i.getX(), i.getY(), this.getScaleFactor());
 			}
 		} else {
 			g.setColor(Constants.CARD_BACK_SYMBOL_COLOR);
-			g.fillOval((x + (width / 2)) - (Card.scale(Constants.SYMBOL_WIDTH) / 2),
-					(y + (height / 2)) - (Card.scale(Constants.SYMBOL_HEIGHT) / 2), Card.scale(Constants.SYMBOL_WIDTH),
-					Card.scale(Constants.SYMBOL_HEIGHT));
+			g.fillOval((x + (width / 2)) - (this.scale(Constants.SYMBOL_WIDTH) / 2),
+					(y + (height / 2)) - (this.scale(Constants.SYMBOL_HEIGHT) / 2), this.scale(Constants.SYMBOL_WIDTH),
+					this.scale(Constants.SYMBOL_HEIGHT));
 		}
 	}
 
