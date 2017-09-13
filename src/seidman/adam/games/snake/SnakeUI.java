@@ -30,6 +30,17 @@ public class SnakeUI extends JFrame implements Playable {
 	private boolean _paused;
 
 	/**
+	 * Get the current running instance of SnakeUI.
+	 * @return SnakeUI- current user interface.
+	 */
+	public static SnakeUI getInstance() {
+		if (_instance == null) {
+			_instance = new SnakeUI();
+		}
+		return _instance;
+	}
+	
+	/**
 	 * Create a new Snake User Interface and set is visible to the user.
 	 */
 	private SnakeUI() {
@@ -62,17 +73,6 @@ public class SnakeUI extends JFrame implements Playable {
 						new KeyEvent(SnakeUI.getInstance().getContentPane(), 0, 0, 0, KeyEvent.VK_P, 'P', 0));
 			}
 		}.schedule();
-	}
-
-	/**
-	 * Get the current running instance of SnakeUI.
-	 * @return SnakeUI- current user interface.
-	 */
-	public static SnakeUI getInstance() {
-		if (_instance == null) {
-			_instance = new SnakeUI();
-		}
-		return _instance;
 	}
 
 	/**

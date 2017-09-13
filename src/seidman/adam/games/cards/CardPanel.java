@@ -34,6 +34,14 @@ public class CardPanel extends JPanel {
 		return false;
 	}
 
+	public Card[] getCardList() {
+		return (Card[]) this._cardList.clone();
+	}
+
+	public void paintComponent(Graphics g) {
+		int panelWidth = this.getWidth();
+	}
+
 	public boolean remove(Card c) {
 		if (!this.contains(c)) {
 			return false;
@@ -47,16 +55,8 @@ public class CardPanel extends JPanel {
 		return false;
 	}
 
-	public Card[] getCardList() {
-		return (Card[]) this._cardList.clone();
-	}
-
 	public void reset() {
 		this._cardList = new ArrayList<Card>();
-	}
-
-	public void paintComponent(Graphics g) {
-		int panelWidth = this.getWidth();
 	}
 
 }

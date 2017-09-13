@@ -37,6 +37,18 @@ public final class MinesweeperUI extends JFrame implements Playable {
 	private JMenu _help;
 	private JMenu _about;
 
+	/**
+	 * Get current instance of MinesweeperUI running.
+	 * 
+	 * @return MinesweeperUI _instance
+	 */
+	public static MinesweeperUI getInstance() {
+		if (_instance == null) {
+			_instance = new MinesweeperUI();
+		}
+		return _instance;
+	}
+	
 	private MinesweeperUI() {
 		super(Variables.TITLE);
 		this.setSize(Variables.frameSize());
@@ -103,24 +115,20 @@ public final class MinesweeperUI extends JFrame implements Playable {
 	}
 
 	/**
-	 * Get current instance of MinesweeperUI running.
-	 * 
-	 * @return MinesweeperUI _instance
-	 */
-	public static MinesweeperUI getInstance() {
-		if (_instance == null) {
-			_instance = new MinesweeperUI();
-		}
-		return _instance;
-	}
-
-	/**
 	 * Redraw all important graphics on the UI.
 	 */
 	public void reset() {
 		this.setContentPane(MinesweeperGame.getInstance().getPanel());
 		this.revalidate();
 		this.repaint();
+	}
+
+	/**
+	 * Method needed for UI implementation.
+	 */
+	public void runUI() {
+		MinesweeperUI.getInstance().setVisible(true); // Create/show new game.
+		showHelpMessage(); // Display help message.
 	}
 
 	/**
@@ -133,14 +141,6 @@ public final class MinesweeperUI extends JFrame implements Playable {
 		// ^ Make font plain ^
 		label.setPreferredSize(new Dimension(375, 215)); // Set Size.
 		JOptionPane.showMessageDialog(null, label, Variables.helpMessageTitle(), JOptionPane.PLAIN_MESSAGE, null);
-	}
-
-	/**
-	 * Method needed for UI implementation.
-	 */
-	public void runUI() {
-		MinesweeperUI.getInstance().setVisible(true); // Create/show new game.
-		showHelpMessage(); // Display help message.
 	}
 
 	public static void main(String[] args) {

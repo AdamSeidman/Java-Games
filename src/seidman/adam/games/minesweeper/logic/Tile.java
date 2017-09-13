@@ -17,11 +17,13 @@ import seidman.adam.games.utilities.Index;
 public final class Tile extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+
+	private final Index INDEX;
 	private final boolean IS_MINE;
 	private final int MINES_SURROUNDING;
-	private final Index INDEX;
-	private boolean _protected;
+
 	private boolean _clicked;
+	private boolean _protected;
 
 	/**
 	 * Create a new Tile.
@@ -31,8 +33,8 @@ public final class Tile extends JPanel {
 	 * @param minesSurrounding
 	 *            Int- number of mines surrounding this tile.
 	 * @param i
-	 *            seidman.adam.games.minesweeper.utilities.Index of the Tile in
-	 *            the Game's JPanel
+	 *            seidman.adam.games.minesweeper.utilities.Index of the Tile in the
+	 *            Game's JPanel
 	 */
 	public Tile(boolean isMine, int minesSurrounding, Index i) {
 		IS_MINE = isMine;
@@ -45,17 +47,10 @@ public final class Tile extends JPanel {
 	}
 
 	/**
-	 * @return True, if mine.
+	 * Set the status of this tile to clicked. (Can only be done once.)
 	 */
-	public boolean isMine() {
-		return IS_MINE;
-	}
-
-	/**
-	 * @return An int- number of mines surrounding.
-	 */
-	public int minesSurrounding() {
-		return MINES_SURROUNDING;
+	public void click() {
+		_clicked = true;
 	}
 
 	/**
@@ -68,10 +63,31 @@ public final class Tile extends JPanel {
 	}
 
 	/**
+	 * @return True, if has been clicked.
+	 */
+	public boolean isClicked() {
+		return _clicked;
+	}
+
+	/**
+	 * @return True, if mine.
+	 */
+	public boolean isMine() {
+		return IS_MINE;
+	}
+
+	/**
 	 * @return True, if right/shift-clicked.
 	 */
 	public boolean isProtected() {
 		return _protected;
+	}
+
+	/**
+	 * @return An int- number of mines surrounding.
+	 */
+	public int minesSurrounding() {
+		return MINES_SURROUNDING;
 	}
 
 	/**
@@ -82,20 +98,6 @@ public final class Tile extends JPanel {
 	 */
 	public void setProtectedness(boolean isProtected) {
 		_protected = isProtected;
-	}
-
-	/**
-	 * @return True, if has been clicked.
-	 */
-	public boolean isClicked() {
-		return _clicked;
-	}
-
-	/**
-	 * Set the status of this tile to clicked. (Can only be done once.)
-	 */
-	public void click() {
-		_clicked = true;
 	}
 
 }

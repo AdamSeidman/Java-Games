@@ -17,24 +17,76 @@ import seidman.adam.games.utilities.timing.TimedTask;
  */
 public class SnakeKeyListener implements KeyListener {
 
+	private Direction _currentDirection;
 	private boolean _horizontal;
 	private boolean _vertical;
-	private Direction _currentDirection;
 	private TimedTask _updateTask;
 
 	/**
 	 * Create a new SnakeKeyListener
 	 * 
 	 * @param updaterTask
-	 *            The TimedTask that currently updates the SnakeUI. This gives
-	 *            the KeyListener access so it can pause it after certain keys
-	 *            are pressed.
+	 *            The TimedTask that currently updates the SnakeUI. This gives the
+	 *            KeyListener access so it can pause it after certain keys are
+	 *            pressed.
 	 */
 	public SnakeKeyListener(TimedTask updaterTask) {
 		_updateTask = updaterTask;
 		_horizontal = true;
 		_vertical = false;
 		_currentDirection = Direction.RIGHT;
+	}
+
+	/**
+	 * @return The current seidman.adan.games.utilities.Direction that the snake is
+	 *         going.
+	 */
+	public Direction getDirection() {
+		return _currentDirection;
+	}
+
+	/**
+	 * Check a specific direction rather than asking for a direction.
+	 * 
+	 * @param d
+	 *            A seidman.adam.games.utilities.Direction to compare to the current
+	 *            Direction.
+	 * @return True, if the two Directions match.
+	 */
+	public boolean isDirection(Direction d) {
+		return _currentDirection.equals(d);
+	}
+
+	/**
+	 * Lets the developer know which kind of direction the snake should go according
+	 * to a key-being=pressed event.
+	 * 
+	 * @param e
+	 *            The KeyEvent from which to check.
+	 * @return True, if is going horizontally.
+	 */
+	private boolean isHorizontal(KeyEvent e) {
+		return e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT;
+	}
+
+	/**
+	 * Lets the developer know which kind of firection the snake should go according
+	 * to a key-being-pressed event.
+	 * 
+	 * @param e
+	 *            The KeyEvent from which to check.
+	 * @return True, if going vertically.
+	 */
+	private boolean isVertical(KeyEvent e) {
+		return e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN;
+	}
+
+	/**
+	 * Reset local variables back to their original state.
+	 */
+	public void reset() {
+		_currentDirection = Direction.EAST;
+		setHorizontality(true);
 	}
 
 	/**
@@ -85,7 +137,9 @@ public class SnakeKeyListener implements KeyListener {
 
 	/**
 	 * Set some local directional booleans in the correct manner.
-	 * @param horizontal A boolean to determine the local ones.
+	 * 
+	 * @param horizontal
+	 *            A boolean to determine the local ones.
 	 */
 	private void setHorizontality(boolean horizontal) {
 		_horizontal = horizontal;
@@ -96,48 +150,6 @@ public class SnakeKeyListener implements KeyListener {
 	 * Only here because of KeyListener implementation. Unused.
 	 */
 	public void keyReleased(KeyEvent e) {
-	}
-
-	/**
-	 * Lets the developer know which kind of direction the snake should go according to a key-being=pressed event.
-	 * @param e The KeyEvent from which to check.
-	 * @return True, if is going horizontally.
-	 */
-	private boolean isHorizontal(KeyEvent e) {
-		return e.getKeyCode() == KeyEvent.VK_LEFT || e.getKeyCode() == KeyEvent.VK_RIGHT;
-	}
-
-	/**
-	 * Lets the developer know which kind of firection the snake should go according to a key-being-pressed event.
-	 * @param e The KeyEvent from which to check.
-	 * @return True, if going vertically.
-	 */
-	private boolean isVertical(KeyEvent e) {
-		return e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN;
-	}
-
-	/**
-	 * @return The current seidman.adan.games.utilities.Direction that the snake is going.
-	 */
-	public Direction getDirection() {
-		return _currentDirection;
-	}
-
-	/**
-	 * Check a specific direction rather than asking for a direction.
-	 * @param d A seidman.adam.games.utilities.Direction to compare to the current Direction.
-	 * @return True, if the two Directions match.
-	 */
-	public boolean isDirection(Direction d) {
-		return _currentDirection.equals(d);
-	}
-
-	/**
-	 * Reset local variables back to their original state.
-	 */
-	public void reset() {
-		_currentDirection = Direction.EAST;
-		setHorizontality(true);
 	}
 
 }

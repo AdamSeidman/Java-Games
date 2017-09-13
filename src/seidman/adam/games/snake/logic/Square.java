@@ -21,8 +21,8 @@ public class Square extends JPanel {
 	 * Create a new square for a Snake screen.
 	 * 
 	 * @param updatesLeft
-	 *            An int- How many update() calls should this square remain a
-	 *            snake square for?
+	 *            An int- How many update() calls should this square remain a snake
+	 *            square for?
 	 */
 	public Square(int updatesLeft) {
 		_updatesLeft = ++updatesLeft;
@@ -40,20 +40,18 @@ public class Square extends JPanel {
 	}
 
 	/**
-	 * Update the background color and _updatesLeft int of this Square.
+	 * Get the current number of update() method calls this Square will remain
+	 * Color.BLACK
+	 * 
+	 * @return An integer- updatesLeft
 	 */
-	public void update() {
-		if (_updatesLeft-- == 0) {
-			_updatesLeft++;
-		} else if (_updatesLeft == Variables.DOT_UPDATE_CONSTANT - 1) {
-			_updatesLeft++;
-		}
-		this.setBackground(_updatesLeft > 0 ? Variables.SNAKE_AND_DOT_COLOR : Variables.BACKGROUND_COLOR);
+	public int getUpdatesLeft() {
+		return _updatesLeft;
 	}
 
 	/**
-	 * When the snake travels into this Square, set the updatesLeft and switch
-	 * the Color.
+	 * When the snake travels into this Square, set the updatesLeft and switch the
+	 * Color.
 	 * 
 	 * @param snakeSize
 	 *            An integer- the current Snake size.
@@ -70,13 +68,15 @@ public class Square extends JPanel {
 	}
 
 	/**
-	 * Get the current number of update() method calls this Square will remain
-	 * Color.BLACK
-	 * 
-	 * @return An integer- updatesLeft
+	 * Update the background color and _updatesLeft int of this Square.
 	 */
-	public int getUpdatesLeft() {
-		return _updatesLeft;
+	public void update() {
+		if (_updatesLeft-- == 0) {
+			_updatesLeft++;
+		} else if (_updatesLeft == Variables.DOT_UPDATE_CONSTANT - 1) {
+			_updatesLeft++;
+		}
+		this.setBackground(_updatesLeft > 0 ? Variables.SNAKE_AND_DOT_COLOR : Variables.BACKGROUND_COLOR);
 	}
 
 }

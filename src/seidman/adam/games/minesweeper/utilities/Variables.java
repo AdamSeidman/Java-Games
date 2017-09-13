@@ -75,27 +75,6 @@ public abstract class Variables {
 	private static boolean _firstTime = true;
 
 	/**
-	 * @return Current java.awt.Dimension that the minesweeper screen should be.
-	 */
-	public static final Dimension frameSize() {
-		return new Dimension(_frameWidth, _frameHeight);
-	}
-
-	/**
-	 * @return Current number of mines on the screen. (Hidden and Not Hidden)
-	 */
-	public static final int numberOfMines() {
-		return _numOfMines;
-	}
-
-	/**
-	 * @return new int[]{grid width, grid height}
-	 */
-	public static final int[] gridSize() {
-		return new int[] { _gridWidth, _gridHeight };
-	}
-
-	/**
 	 * Get new variables (to put in queue) from the user.
 	 */
 	public static final void adjustVariables() {
@@ -157,14 +136,17 @@ public abstract class Variables {
 	}
 
 	/**
-	 * Make the queued variables become the actual variables.
+	 * @return Current java.awt.Dimension that the minesweeper screen should be.
 	 */
-	public static final void update() {
-		_gridHeight = _q_gridHeight;
-		_gridWidth = _q_gridWidth;
-		_numOfMines = _q_numOfMines;
-		_frameWidth = _q_gridWidth * TILE_SIZE;
-		_frameHeight = SOUTHERN_LABEL_HEIGHT + MENU_HEIGHT + (_q_gridHeight * TILE_SIZE);
+	public static final Dimension frameSize() {
+		return new Dimension(_frameWidth, _frameHeight);
+	}
+
+	/**
+	 * @return new int[]{grid width, grid height}
+	 */
+	public static final int[] gridSize() {
+		return new int[] { _gridWidth, _gridHeight };
 	}
 
 	/**
@@ -185,6 +167,24 @@ public abstract class Variables {
 	 */
 	public static final String minesLeftLabelText(int n) {
 		return MINES_LEFT_LABEL_TEXT_ALPHA + Integer.toString(_numOfMines - n) + MINES_LEFT_LABEL_TEXT_BETA;
+	}
+
+	/**
+	 * @return Current number of mines on the screen. (Hidden and Not Hidden)
+	 */
+	public static final int numberOfMines() {
+		return _numOfMines;
+	}
+
+	/**
+	 * Make the queued variables become the actual variables.
+	 */
+	public static final void update() {
+		_gridHeight = _q_gridHeight;
+		_gridWidth = _q_gridWidth;
+		_numOfMines = _q_numOfMines;
+		_frameWidth = _q_gridWidth * TILE_SIZE;
+		_frameHeight = SOUTHERN_LABEL_HEIGHT + MENU_HEIGHT + (_q_gridHeight * TILE_SIZE);
 	}
 
 }

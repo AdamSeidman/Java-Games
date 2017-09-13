@@ -35,6 +35,17 @@ public final class TileClickListener implements MouseListener {
 	}
 
 	/**
+	 * Check to see if a Mouse Click is a right/shift-click.
+	 * 
+	 * @param e
+	 *            MouseEvent of the mouse-click you are checking.
+	 * @return True, if right/shift-click.
+	 */
+	public boolean isProtectClick(MouseEvent e) {
+		return SwingUtilities.isRightMouseButton(e) || e.isShiftDown();
+	}
+	
+	/**
 	 * Needed to implement. Do nothing on mouse click.
 	 */
 	public void mouseClicked(MouseEvent e) {
@@ -77,12 +88,12 @@ public final class TileClickListener implements MouseListener {
 			TILE.setBackground(TILE.isProtected() ? Variables.PROTECTED_TILE_COLOR : Variables.UNTOUCHED_COLOR);
 		} else if (TILE.isMine()) {
 			// If left-clicked on a mine, end the game.
-			g.gameOver(Variables.LOSE_MESSAGE, Variables.LOSE_MINE_COLOR);
+			g.runGameOverSequence(Variables.LOSE_MESSAGE, Variables.LOSE_MINE_COLOR);
 		} else if (TILE.minesSurrounding() == 0) {
 			// If tile is blank, run recursive
 			// seidman.adam.games.minesweeper.logic.Game.blankClicks() method.
 			TILE.click();
-			g.blankClicks(TILE.getIndex());
+			g.callBlankClicks(TILE.getIndex());
 			TILE.setBorder(BorderFactory.createEmptyBorder());
 			TILE.setBackground(Variables.TOUCHED_COLOR);
 		} else {
@@ -98,17 +109,6 @@ public final class TileClickListener implements MouseListener {
 		// the user has won.
 		g._numOfMinesLeftLabel.setText(Variables.minesLeftLabelText(g.getNumberOfMinesProtected()));
 		g.checkForWinning();
-	}
-
-	/**
-	 * Check to see if a Mouse Click is a right/shift-click.
-	 * 
-	 * @param e
-	 *            MouseEvent of the mouse-click you are checking.
-	 * @return True, if right/shift-click.
-	 */
-	public boolean isProtectClick(MouseEvent e) {
-		return SwingUtilities.isRightMouseButton(e) || e.isShiftDown();
 	}
 
 }

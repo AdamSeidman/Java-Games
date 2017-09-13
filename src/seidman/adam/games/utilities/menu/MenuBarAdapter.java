@@ -9,13 +9,14 @@ public abstract class MenuBarAdapter implements FocusListener {
 	public MenuBarAdapter() {
 	}
 
+
+	public abstract Container getContent();
+	
 	public final void focusGained(FocusEvent e) {
 		getContent().requestFocus();
 	}
 
 	public void focusLost(FocusEvent e) {
 	}
-	
-	public abstract Container getContent();
 	
 }

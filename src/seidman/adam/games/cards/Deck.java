@@ -8,8 +8,32 @@ public class Deck {
 		shuffle();
 	}
 
-	private Deck(String[] args) {
+	private Deck(Object ph) {
 		_cards = new Card[52];
+	}
+
+	public boolean contains(Card c) {
+		try {
+			for (Card i : _cards) {
+				if (c.equals(i)) {
+					return true;
+				}
+			}
+		} catch (NullPointerException e) {
+		}
+		return false;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Deck) {
+			return ((Deck) obj).toString().equals(this.toString());
+		}
+		return super.equals(obj);
+	}
+
+	public Card[] getDeck() {
+		return this._cards;
 	}
 
 	public void shuffle() {
@@ -28,7 +52,7 @@ public class Deck {
 			_cards[i] = temp._cards[i];
 		}
 	}
-	
+
 	@Override
 	public String toString() {
 		String str = "";
@@ -37,28 +61,4 @@ public class Deck {
 		return str;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (obj instanceof Deck) {
-			return ((Deck) obj).toString().equals(this.toString());
-		}
-		return super.equals(obj);
-	}
-
-	public boolean contains(Card c) {
-		try {
-			for (Card i : _cards) {
-				if (c.equals(i)) {
-					return true;
-				}
-			}
-		} catch (NullPointerException e) {
-		}
-		return false;
-	}
-
-	public Card[] getDeck() {
-		return this._cards;
-	}
-	
 }

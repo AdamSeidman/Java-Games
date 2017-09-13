@@ -14,8 +14,9 @@ import java.util.TimerTask;
 public abstract class TimedTask {
 
 	private final long TIME;
-	private Timer _timer;
+
 	private boolean _nextTaskHasRan;
+	private Timer _timer;
 
 	/**
 	 * Create a TimedTask.
@@ -28,20 +29,6 @@ public abstract class TimedTask {
 		_timer = new Timer();
 		_nextTaskHasRan = false;
 	}
-
-	/**
-	 * Method ran for each task.
-	 */
-	public final void run() {
-		task();
-		_nextTaskHasRan = true;
-	}
-
-	/**
-	 * Abstract task method to be implemented by the user. This is the first
-	 * thing ran when the task is going.
-	 */
-	public abstract void task();
 
 	/**
 	 * @return A double- the amount of seconds desired by the user.
@@ -57,6 +44,40 @@ public abstract class TimedTask {
 	public final long getMillis() {
 		return TIME;
 	}
+	
+	/**
+	 * Get the Task in Timer Task.
+	 * 
+	 * @return Desired task as java.util.TimerTask
+	 */
+	private TimerTask getTask() {
+		final TimedTask tt = this;
+		return new TimerTask() {
+			public void run() {
+				task();
+				tt._nextTaskHasRan = true;
+			}
+		};
+	}
+	
+	/**
+	 * @return True if the user hasn't checked back since the last time the task
+	 *         was called.
+	 */
+	public boolean hasNextTaskRan() {
+		boolean ret = _nextTaskHasRan;
+		_nextTaskHasRan = false;
+		return ret;
+	}
+	
+	/**
+	 * Method ran for each task.
+	 */
+	public final void run() {
+		task();
+		_nextTaskHasRan = true;
+	}
+
 
 	/**
 	 * Schedule the task once in the future.
@@ -64,7 +85,7 @@ public abstract class TimedTask {
 	public void schedule() {
 		new Timer().schedule(getTask(), TIME);
 	}
-
+	
 	/**
 	 * Put the task desired on repeat.
 	 */
@@ -89,30 +110,11 @@ public abstract class TimedTask {
 	public void stop() {
 		_timer.cancel();
 	}
-
+	
 	/**
-	 * Get the Task in Timer Task.
-	 * 
-	 * @return Desired task as java.util.TimerTask
+	 * Abstract task method to be implemented by the user. This is the first
+	 * thing ran when the task is going.
 	 */
-	private TimerTask getTask() {
-		final TimedTask tt = this;
-		return new TimerTask() {
-			public void run() {
-				task();
-				tt._nextTaskHasRan = true;
-			}
-		};
-	}
-
-	/**
-	 * @return True if the user hasn't checked back since the last time the task
-	 *         was called.
-	 */
-	public boolean hasNextTaskRan() {
-		boolean ret = _nextTaskHasRan;
-		_nextTaskHasRan = false;
-		return ret;
-	}
+	public abstract void task();
 
 }

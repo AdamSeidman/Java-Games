@@ -17,8 +17,8 @@ import javax.swing.SwingConstants;
  */
 public abstract class WindowLeavingAdapter implements WindowListener {
 
-	private final String TITLE;
 	private final String QUIT_MESSAGE;
+	private final String TITLE;
 
 	/**
 	 * Create a WindowLeavingAdapter
