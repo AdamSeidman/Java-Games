@@ -29,9 +29,13 @@ public class Constants {
 	protected static final int SYMBOL_WIDTH = 60;
 	protected static final int SYMBOL_HEIGHT = 170;
 	protected static final Dimension CLUB_SIZE = new Dimension(32, 28);
+	protected static final Color CLUB_COLOR = Color.BLACK;
 	protected static final Dimension HEART_SIZE = new Dimension(26, 25);
-	protected static final Dimension SPADE_SIZE = new Dimension(32, 26);
+	protected static final Color HEART_COLOR = Color.RED;
+	protected static final Dimension SPADE_SIZE = new Dimension(24, 26);
+	protected static final Color SPADE_COLOR = Color.BLACK;
 	protected static final Dimension DIAMOND_SIZE = new Dimension(24, 28);
+	protected static final Color DIAMOND_COLOR = Color.RED;
 
 	// Constants- Offsets for drawing cards.
 	private static final int TWO_AND_THREE_OFFSET = 60;
@@ -49,6 +53,7 @@ public class Constants {
 		int outOffY = Card.scale(OUTSIDE_OFFSET_Y);
 		int fourThroughTenY = Card.scale(FOUR_THROUGH_TEN_OFFSET_Y);
 		int twoAndThree = Card.scale(TWO_AND_THREE_OFFSET);
+		int eightAndTen = Card.scale(EIGHT_AND_TEN_OFFSET);
 		ArrayList<Index> indexList = new ArrayList<Index>();
 		indexList.add(cardCenter);
 		ret.put(ACE, indexList);
@@ -89,7 +94,7 @@ public class Constants {
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
 		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - SEVEN_OFFSET));
+		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - Card.scale(SEVEN_OFFSET)));
 		ret.put(7, indexList);
 		indexList = new ArrayList<Index>();
 		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
@@ -98,8 +103,8 @@ public class Constants {
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + fourThroughTenY));
 		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY()));
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY()));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - EIGHT_AND_TEN_OFFSET));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + EIGHT_AND_TEN_OFFSET));
+		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
+		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
 		ret.put(8, indexList);
 		indexList = new ArrayList<Index>();
 		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() - fourThroughTenY));
@@ -121,8 +126,8 @@ public class Constants {
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() - outOffY));
 		indexList.add(new Index(cardCenter.getX() - outOffX, cardCenter.getY() + outOffY));
 		indexList.add(new Index(cardCenter.getX() + outOffX, cardCenter.getY() + outOffY));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - Card.scale(EIGHT_AND_TEN_OFFSET)));
-		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + Card.scale(EIGHT_AND_TEN_OFFSET)));
+		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() - eightAndTen));
+		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + eightAndTen));
 		ret.put(10, indexList);
 		indexList = new ArrayList<Index>();
 		indexList.add(new Index(cardCenter.getX(), cardCenter.getY() + Card.scale(FACE_OFFSET)));
