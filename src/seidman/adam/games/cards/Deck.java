@@ -28,7 +28,7 @@ public class Deck {
 			_cards[i] = temp._cards[i];
 		}
 	}
-
+	
 	@Override
 	public String toString() {
 		String str = "";

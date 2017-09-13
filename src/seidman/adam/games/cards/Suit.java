@@ -6,11 +6,11 @@ import java.awt.Graphics;
 public interface Suit {
 
 	public void draw(Graphics g, int x, int y);
-
+	
 	public class Club implements Suit {
 		public void draw(Graphics g, int x, int y) {
-			x -= (Constants.CLUB_SIZE.width / 2);
-			y -= (Constants.CLUB_SIZE.height / 2);
+			x -= (Card.scale(Constants.CLUB_SIZE.width) / 2);
+			y -= (Card.scale(Constants.CLUB_SIZE.height) / 2);
 			Color rColor = g.getColor();
 			g.setColor(Color.BLACK);
 			g.fillOval(x, 6 + y, 16, 16);
