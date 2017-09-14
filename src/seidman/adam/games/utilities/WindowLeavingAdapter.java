@@ -26,7 +26,7 @@ public abstract class WindowLeavingAdapter implements WindowListener {
 	 * @param title
 	 *            A String- title for confirmation JOptionPane.
 	 * @param quitMessage
-	 *            A String- messafe for confirmation JOptionPane.
+	 *            A String- message for confirmation JOptionPane.
 	 */
 	public WindowLeavingAdapter(String title, String quitMessage) {
 		this.TITLE = title;

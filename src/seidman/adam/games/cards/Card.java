@@ -1,8 +1,10 @@
 package seidman.adam.games.cards;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.Random;
 
+import seidman.adam.games.utilities.ClickableRegion;
 import seidman.adam.games.utilities.Index;
 
 /**
@@ -14,10 +16,40 @@ import seidman.adam.games.utilities.Index;
  */
 public class Card {
 
+	public enum RegionCollectorType {
+		USE_LATEST, USE_ALL, NONE
+	};
+
+	private ArrayList<ClickableRegion> _clickRegions = new ArrayList<ClickableRegion>();
 	private boolean _flipped = false;
 	private int _number;
 	private double _scaleFactor = 1.0;
 	private Suit _suit;
+
+	RegionCollectorType _regCollType;
+
+	/**
+	 * Create a new random card.
+	 * 
+	 * @return A new Card.
+	 */
+	public static final Card getRandomCard() {
+		Random random = new Random();
+		Suit suit = new Suit.Diamond();
+		int r = random.nextInt(4);
+		switch (r) {
+		case Constants.CLUBS:
+			suit = new Suit.Club();
+			break;
+		case Constants.HEARTS:
+			suit = new Suit.Heart();
+			break;
+		case Constants.SPADES:
+			suit = new Suit.Spade();
+			break;
+		}
+		return new Card(random.nextInt(Constants.KING) + 1, suit);
+	}
 
 	/**
 	 * Create a card.
@@ -28,6 +60,11 @@ public class Card {
 	 *            An Suit- the suit of the card.
 	 */
 	public Card(int number, Suit suit) {
+		this(number, suit, RegionCollectorType.USE_LATEST);
+	}
+
+	public Card(int number, Suit suit, RegionCollectorType regCollType) {
+		this._regCollType = regCollType;
 		this._suit = suit;
 		this._number = number;
 		this._flipped = number < 0;
@@ -40,15 +77,25 @@ public class Card {
 	public void draw(Graphics g, int x, int y) {
 		int width = this.scale(Constants.CARD_WIDTH);
 		int height = this.scale(Constants.CARD_HEIGHT);
+
+		// Region Collecting
+		if (this._regCollType == RegionCollectorType.USE_LATEST) {
+			this._clickRegions = new ArrayList<ClickableRegion>();
+		}
+		if (this._regCollType != RegionCollectorType.NONE) {
+			this._clickRegions.add(new ClickableRegion(x, y, width, height));
+		}
+
+		// Normal Drawing
 		g.setColor(this._number <= 0 ? Constants.CARD_BACK_COLOR : Constants.CARD_FRONT_COLOR);
 		g.fillRoundRect(x, y, width, height, Constants.ROUND_RECT_CONSTANTS[0], Constants.ROUND_RECT_CONSTANTS[1]);
 		if (Constants.DRAW_CARD_OUTLINE) {
 			g.setColor(Constants.CARD_OUTLINE_COLOR);
 			g.drawRoundRect(x, y, width, height, Constants.ROUND_RECT_CONSTANTS[0], Constants.ROUND_RECT_CONSTANTS[1]);
 		}
-		if (_number > 0) {
+		if (this._number > 0) {
 			for (Index i : Constants.coordList(x, y, this)) {
-				_suit.draw(g, i.getX(), i.getY(), this.getScaleFactor());
+				this._suit.draw(g, i.getX(), i.getY(), this.getScaleFactor());
 			}
 		} else {
 			g.setColor(Constants.CARD_BACK_SYMBOL_COLOR);
@@ -92,29 +139,6 @@ public class Card {
 		return this._number;
 	}
 
-	/**
-	 * Create a new random card.
-	 * 
-	 * @return A new Card.
-	 */
-	public static final Card getRandomCard() {
-		Random random = new Random();
-		Suit s = new Suit.Diamond();
-		int r = random.nextInt(4);
-		switch (r) {
-		case Constants.CLUBS:
-			s = new Suit.Club();
-			break;
-		case Constants.HEARTS:
-			s = new Suit.Heart();
-			break;
-		case Constants.SPADES:
-			s = new Suit.Spade();
-			break;
-		}
-		return new Card(random.nextInt(13) + 1, s);
-	}
-
 	public double getScaleFactor() {
 		return this._scaleFactor;
 	}
@@ -131,16 +155,16 @@ public class Card {
 	}
 
 	public boolean isBlackjackWith(Card c) {
-		if (_number == Constants.ACE) {
+		if (this._number == Constants.ACE) {
 			return c.isFaceCard();
-		} else if (_number > 10 && c.getNum() < 10) {
+		} else if (this._number > 10 && c.getNum() < 10) {
 			return c.isBlackjackWith(this);
 		}
 		return false;
 	}
 
 	public boolean isFaceCard() {
-		return _number == 11 || _number == 12 || _number == 13;
+		return this._number == Constants.JACK || this._number == Constants.QUEEN || this._number == Constants.KING;
 	}
 
 	/**

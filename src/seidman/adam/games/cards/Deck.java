@@ -5,11 +5,11 @@ public class Deck {
 	private Card[] _cards;
 
 	public Deck() {
-		shuffle();
+		this.shuffle();
 	}
 
 	private Deck(Object ph) {
-		_cards = new Card[52];
+		this._cards = new Card[52];
 	}
 
 	public boolean contains(Card c) {
@@ -43,7 +43,7 @@ public class Deck {
 	public void shuffle() {
 		_cards = new Card[52];
 		Deck temp = new Deck(null);
-		assignLoop: for (int i = 0; i < temp._cards.length; i++) {
+		assignLoop: for (int i = 0; i < temp.getDeck().length; i++) {
 			Card c = Card.getRandomCard();
 			if (temp.contains(c)) {
 				i--;
@@ -51,8 +51,8 @@ public class Deck {
 			}
 			temp._cards[i] = c;
 		}
-		for (int i = 0; i < _cards.length; i++) {
-			_cards[i] = temp._cards[i];
+		for (int i = 0; i < this._cards.length; i++) {
+			this._cards[i] = temp.getDeck()[i];
 		}
 	}
 
