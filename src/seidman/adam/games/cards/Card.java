@@ -36,7 +36,7 @@ public class Card {
 	public Card clone() {
 		return new Card(this._number, this._suit);
 	}
-	
+
 	public void draw(Graphics g, int x, int y) {
 		int width = this.scale(Constants.CARD_WIDTH);
 		int height = this.scale(Constants.CARD_HEIGHT);
@@ -77,6 +77,7 @@ public class Card {
 	 */
 	public boolean flipCard() {
 		this._number *= -1;
+		this._flipped = !this._flipped;
 		return this.isFlipped();
 	}
 
