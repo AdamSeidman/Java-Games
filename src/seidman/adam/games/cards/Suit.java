@@ -16,7 +16,7 @@ public interface Suit {
 
 		// Heart
 		private static final int[] HOL = new int[] { 1, 0, 14, 14 };
-		private static final int[] HOR = new int[] { 12, 0, 15, 14 };
+		private static final int[] HOR = new int[] { 12, 0, 14, 14 };
 		private static final int H_ADDITIONAL_OFFSET_X = 2;
 		private static final int H_ADDITIONAL_OFFSET_Y = 11;
 		private static final int[] HTX = new int[] { 11, 0, 23 };

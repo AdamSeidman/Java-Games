@@ -32,6 +32,10 @@ public class Deck {
 		return super.equals(obj);
 	}
 
+	public Card get(int n) {
+		return this._cards[n].clone();
+	}
+
 	public Card[] getDeck() {
 		return this._cards;
 	}
@@ -40,7 +44,6 @@ public class Deck {
 		_cards = new Card[52];
 		Deck temp = new Deck(null);
 		assignLoop: for (int i = 0; i < temp._cards.length; i++) {
-			System.out.println(i);
 			Card c = Card.getRandomCard();
 			if (temp.contains(c)) {
 				i--;

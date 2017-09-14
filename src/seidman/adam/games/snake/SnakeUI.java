@@ -31,6 +31,7 @@ public class SnakeUI extends JFrame implements Playable {
 
 	/**
 	 * Get the current running instance of SnakeUI.
+	 * 
 	 * @return SnakeUI- current user interface.
 	 */
 	public static SnakeUI getInstance() {
@@ -39,7 +40,7 @@ public class SnakeUI extends JFrame implements Playable {
 		}
 		return _instance;
 	}
-	
+
 	/**
 	 * Create a new Snake User Interface and set is visible to the user.
 	 */
@@ -77,7 +78,9 @@ public class SnakeUI extends JFrame implements Playable {
 
 	/**
 	 * Show/hide the pause menu on the screen.
-	 * @param show Whether or not you would like to show the pause message.
+	 * 
+	 * @param show
+	 *            Whether or not you would like to show the pause message.
 	 */
 	public void displayPauseMenu(boolean show) {
 		boolean prevPaused = _paused;
@@ -102,8 +105,8 @@ public class SnakeUI extends JFrame implements Playable {
 	}
 
 	public static void main(String[] args) {
-		
+
 		SnakeUI.getInstance().runUI();
 	}
-	
+
 }

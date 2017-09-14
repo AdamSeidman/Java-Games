@@ -10,7 +10,12 @@ public class Constants {
 
 	protected static final int CARD_WIDTH = 140;
 	protected static final int CARD_HEIGHT = 190;
-	protected static final int CARD_PANEL_BUFFER = 20;
+	protected static final Color DEFAULT_BACKGROUND_COLOR = new Color(40, 140, 73);
+	
+	// CardPanel Constants
+	protected static final int MIN_BUFFER_Y = 20;
+	protected static final int MIN_BUFFER_X = 20;
+	protected static final double MIN_CARD_SCALE = 0.35;
 
 	// Card Face Coloring
 	protected static final Color CARD_FRONT_COLOR = Color.WHITE;

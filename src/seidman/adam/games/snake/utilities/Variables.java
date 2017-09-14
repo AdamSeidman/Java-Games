@@ -21,6 +21,7 @@ public abstract class Variables {
 	public static final String POINTS_PHRASE = "  |  Points: ";
 	public static final String[] PAUSE_MESSAGE = new String[] { "Press the Space Bar to Continue",
 			"Press 'P' key to Pause", "Use the Arrow Keys to Turn the Snake" };
+	public static final String QUIT_MESSAGE = "Are you sure you would like to quit?";
 	public static final String TITLE = "Snake";
 
 	// Colors

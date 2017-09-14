@@ -14,6 +14,7 @@ import seidman.adam.games.utilities.Index;
  */
 public class Card {
 
+	private boolean _flipped = false;
 	private int _number;
 	private double _scaleFactor = 1.0;
 	private Suit _suit;
@@ -29,8 +30,13 @@ public class Card {
 	public Card(int number, Suit suit) {
 		this._suit = suit;
 		this._number = number;
+		this._flipped = number < 0;
 	}
 
+	public Card clone() {
+		return new Card(this._number, this._suit);
+	}
+	
 	public void draw(Graphics g, int x, int y) {
 		int width = this.scale(Constants.CARD_WIDTH);
 		int height = this.scale(Constants.CARD_HEIGHT);
@@ -61,6 +67,21 @@ public class Card {
 			return this.toString().equals(obj.toString());
 		}
 		return super.equals(obj);
+	}
+
+	/**
+	 * Flips the card. If it is facing forward, hides the cards face. If it is
+	 * facing backward, it shows you the cards face.
+	 * 
+	 * @return this.isFlipped()
+	 */
+	public boolean flipCard() {
+		this._number *= -1;
+		return this.isFlipped();
+	}
+
+	public int getHeight() {
+		return (int) (((double) Constants.CARD_HEIGHT) * this.getScaleFactor());
 	}
 
 	/**
@@ -104,6 +125,10 @@ public class Card {
 		return this._suit;
 	}
 
+	public int getWidth() {
+		return (int) (((double) Constants.CARD_WIDTH) * this.getScaleFactor());
+	}
+
 	public boolean isBlackjackWith(Card c) {
 		if (_number == Constants.ACE) {
 			return c.isFaceCard();
@@ -115,6 +140,13 @@ public class Card {
 
 	public boolean isFaceCard() {
 		return _number == 11 || _number == 12 || _number == 13;
+	}
+
+	/**
+	 * @return True, if number <= 0.
+	 */
+	public boolean isFlipped() {
+		return this._number <= 0;
 	}
 
 	/**
