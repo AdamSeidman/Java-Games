@@ -9,6 +9,7 @@ import java.awt.Color;
  */
 public abstract class Constants {
 
+	static final int ACE_ADDITIONAL_VALUE = 10;
 	static final Color BG_COLOR = Color.GREEN;
 	static final int BLACKJACK = 21;
 	static final int[] CARDS_TO_FLIP = new int[] { 0 };
@@ -18,5 +19,5 @@ public abstract class Constants {
 	static final int NUMBER_LIMIT = 21;
 	static final int[] PLAYER_STARTING_CARDS = new int[] { 2, 3 };
 	static final boolean WIN_ON_TIE = false; // TODO check
-	
+
 }

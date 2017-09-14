@@ -4,7 +4,6 @@ import javax.swing.JPanel;
 
 import seidman.adam.games.cards.Card;
 import seidman.adam.games.cards.Deck;
-import seidman.adam.games.cards.Utilities;
 
 /**
  * 
@@ -52,6 +51,14 @@ public class BlackjackGame extends JPanel {
 		return this._playerCards.isBusted();
 	}
 
+	public boolean dealerHasBlackjack() {
+		return this.hasBlackjack(this._dealerCards, Constants.DEALER_STARTING_CARDS.length);
+	}
+
+	public boolean dealerHasNumLimit() {
+		return this.hasNumberLimit(this._dealerCards);
+	}
+
 	public Card[] getDealerCards() {
 		Card[] ret = new Card[this._dealerCards.size()];
 		for (int i = 0; i < ret.length; i++) {
@@ -68,15 +75,41 @@ public class BlackjackGame extends JPanel {
 		return ret;
 	}
 
+	boolean hasBlackjack(BCardList list, int handSizeLimit) {
+		return list.size() == handSizeLimit && list.get(0).isBlackjackWith(list.get(1));
+	}
+
+	boolean hasNumberLimit(BCardList list) {
+		return list.sum() == Constants.NUMBER_LIMIT;
+	}
+
 	public boolean isDealerWinning() {
+		if (this.playerHasBlackjack() && this.dealerHasBlackjack()
+				|| this.playerHasNumLimit() && this.dealerHasNumLimit()) {
+			return false;
+		}
 		return this._dealerCards.sum() >= this._playerCards.sum() && !this._dealerCards.isBusted();
 	}
 
 	public boolean isPlayerWinning() {
+		if (this.playerHasBlackjack()) {
+			return true;
+		}
+		if (this.playerHasNumLimit()) {
+			return !this.dealerHasBlackjack();
+		}
 		if (this._dealerCards.sum() == this._playerCards.sum()) {
 			return Constants.WIN_ON_TIE;
 		}
 		return !this.isDealerWinning();
+	}
+
+	public boolean playerHasBlackjack() {
+		return this.hasBlackjack(this._playerCards, Constants.PLAYER_STARTING_CARDS.length);
+	}
+
+	public boolean playerHasNumLimit() {
+		return this.hasNumberLimit(this._playerCards);
 	}
 
 	public void resetRound() {
@@ -97,12 +130,34 @@ public class BlackjackGame extends JPanel {
 	}
 
 	/**
-	 * Run the sequence of hitting/staying for the dealer's cards.
+	 * Run the dealer sequence as specified in runDealerSequence(int millis), but
+	 * does not pause between times adding card to the dealer's list. This also has
+	 * no chance of throwing an InterruptedException
+	 * 
 	 * @return True, if the dealer busts.
 	 */
 	public boolean runDealerSequence() {
-		// TODO
-		// TODO Also a pausable method.
+		try {
+			return this.runDealerSequence(0);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	/**
+	 * Run the sequence of hitting/staying for the dealer's cards. Includes a pause
+	 * between the reveal of each card.
+	 * 
+	 * @return True, if the dealer busts.
+	 */
+	public boolean runDealerSequence(long millis) throws InterruptedException {
+		while (this._dealerCards.sum() <= Constants.DEALER_HIT_NUMBER) {
+			this._dealerCards.add(this._deck.getDeck()[this._deckIndex++]);
+			if (millis > 0) {
+				Thread.sleep(millis);
+			}
+		}
 		return this._dealerCards.isBusted();
 	}
 

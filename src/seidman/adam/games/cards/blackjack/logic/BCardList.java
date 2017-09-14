@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import seidman.adam.games.cards.Card;
 import seidman.adam.games.cards.Utilities;
 
+/**
+ * 
+ * List of seidman.adam.games.cards.Card's customized for Blackjack use
+ * 
+ * @author Adam Seidman
+ *
+ */
 public class BCardList extends ArrayList<Card> {
 
 	private static final long serialVersionUID = 1L;
